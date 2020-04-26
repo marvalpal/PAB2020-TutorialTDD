@@ -1,0 +1,216 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="spanish">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Preparación del entorno &#8212; documentación de TutorialTDD - </title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Objetivos" href="Objetivos.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="preparacion-del-entorno">
+<h1><em>Preparación del entorno</em><a class="headerlink" href="#preparacion-del-entorno" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Una vez instalado en nuestro sistema:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Java 13 (versión de Java superior a 8)</li>
+<li>Maven (version 3.6.1)</li>
+<li>IntelliJ IDEA</li>
+</ul>
+</div></blockquote>
+<p>Podemos empezar a crear nuestro proyecto.</p>
+<div class="section" id="creacion-del-proyecto-factorial">
+<h2>Creación del proyecto FACTORIAL<a class="headerlink" href="#creacion-del-proyecto-factorial" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Vamos a resumir una serie de pasos a seguir:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Abrimos <strong>IntelliJ IDEA</strong></li>
+<li>Creamos un nuevo proyecto</li>
+<li>JDK de <strong>JAVA</strong> y arquetipo de <strong>MAVEN</strong></li>
+<li>Guardamos el proyecto en carpeta deseada</li>
+</ol>
+</div></blockquote>
+<p>Una vez instalados en el entorno de IntelliJ IDEA y seleccionamos para crear un proyecto nuevo, tendremos que
+especificar el Java a emplear y seleccionar el arquetipo de Maven que corresponde, señalados en la siguiente imagen.</p>
+<div class="figure">
+<img alt="_images/creacion1.jpg" src="_images/creacion1.jpg" />
+</div>
+<p>Luego le damos el nombre al proyecto (en este caso <em>FACTORIAL(TDD)</em>) y lo situamos en la carpeta deseada.
+Nos aparecerá una ventana con la versión de Maven importada y solo tendremos que finalizar.</p>
+<div class="figure">
+<img alt="_images/creacion2.jpg" src="_images/creacion2.jpg" />
+</div>
+<p>Una vez realizado estos pasos, obtendremos un proyecto con la estructura ya definida y el fichero <em>pom.xml</em> en el
+que encontramos las dependencias necesarias de Maven.</p>
+<div class="figure">
+<img alt="_images/creacion3.jpg" src="_images/creacion3.jpg" />
+</div>
+</div>
+<div class="section" id="junit-jupiter-5-6-2">
+<h2>JUnit Jupiter 5.6.2<a class="headerlink" href="#junit-jupiter-5-6-2" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Nos fijamos en las dependencias de JUnit en el fichero pom.xml y observamos que la versión no corresponde con la 5.</p>
+<div class="figure">
+<img alt="_images/creacion4.jpg" src="_images/creacion4.jpg" />
+</div>
+<p>Para la modificación de esta dependencia buscamos en el repositorio de Maven el código html que corresponde para
+la version de <em>JUnit.Jupiter versión 5.6.2</em>.</p>
+<div class="highlight-HTML notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">dependency</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">groupId</span><span class="p">&gt;</span>org.junit.jupiter<span class="p">&lt;/</span><span class="nt">groupId</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">artifactId</span><span class="p">&gt;</span>junit-jupiter-api<span class="p">&lt;/</span><span class="nt">artifactId</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">version</span><span class="p">&gt;</span>5.6.2<span class="p">&lt;/</span><span class="nt">version</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">scope</span><span class="p">&gt;</span>test<span class="p">&lt;/</span><span class="nt">scope</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">dependency</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Este es el código que corresponde a la versión de JUnit a utilizar, y tendríamos que modificarlo en las
+dependencias de pom.xml. Una vez realizada esta modificación, probamos el test de prueba que el proyecto
+ha generado por defecto. Si nos da error, podemos volver a importar JUnit en a clase <em>AppTest</em>, seleccionando
+el JUnit que hemos añadido en las dependencias.
+Una vez que ejecutamos el test sin errores, ya podemos adecuar el proyecto para nuestros test y nuestra clase FACTORIAL
+a implementar.</p>
+<div class="figure">
+<img alt="_images/creacion5.jpg" src="_images/creacion5.jpg" />
+</div>
+<p>Nos creamos los nuevos paquetes y las clases <em>Factorial</em> y <em>FactorialTest</em>, donde trabajaremos en la aplicación
+de TDD a través de las pruebas de JUnit.</p>
+<div class="topic">
+<p class="topic-title">Organización de nuestra carpeta <strong>src</strong>:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>main</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>java</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><strong>org.FACTORIAL.TDD</strong></dt>
+<dd><ul class="first last">
+<li><em>Factorial</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>test</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>java</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><strong>org.FACTORIAL.TDD</strong></dt>
+<dd><ul class="first last">
+<li><em>FactorialTest</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">TutorialTDD</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Objetivos.html">Objetivos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><em>Preparación del entorno</em></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creacion-del-proyecto-factorial">Creación del proyecto FACTORIAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#junit-jupiter-5-6-2">JUnit Jupiter 5.6.2</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Objetivos.html" title="capítulo anterior">Objetivos</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, marvalpal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/PreparacionEntorno.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
