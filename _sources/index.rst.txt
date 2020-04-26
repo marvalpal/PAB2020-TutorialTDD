@@ -3,12 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to TutorialTDD's documentation!
-=======================================
+Test Driven Development 
+=========================
+*TDD aplicado al proyecto FACTORIAL*
+....................................
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Indice de contenidos:
    
    Objetivos
    PreparacionEntorno
