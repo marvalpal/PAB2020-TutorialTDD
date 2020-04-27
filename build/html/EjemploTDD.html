@@ -33,6 +33,30 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><em>Ejemplo de TDD</em></a><ul>
+<li><a class="reference internal" href="#un-solo-caso-basico">Un solo caso básico</a><ul>
+<li><a class="reference internal" href="#clase-factorial">Clase Factorial</a></li>
+<li><a class="reference internal" href="#clase-factorialtest">Clase FactorialTest</a></li>
+<li><a class="reference internal" href="#id1">Clase Factorial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mas-de-un-caso">Más de un caso</a><ul>
+<li><a class="reference internal" href="#id2">Clase Factorial</a></li>
+<li><a class="reference internal" href="#id3">Clase FactorialTest</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#caso-general">Caso general</a><ul>
+<li><a class="reference internal" href="#id4">Clase FactorialTest</a></li>
+<li><a class="reference internal" href="#id5">Clase FactorialTest</a></li>
+<li><a class="reference internal" href="#id6">Clase FactorialTest</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="PreparacionEntorno.html"
                         title="previous chapter"><em>Preparación del entorno</em></a></p>
@@ -76,26 +100,330 @@ en diferentes fases:</p>
 <li>Caso general</li>
 </ol>
 </div></blockquote>
+<div class="section" id="un-solo-caso-basico">
+<h2>Un solo caso básico<a class="headerlink" href="#un-solo-caso-basico" title="Permalink to this headline">¶</a></h2>
+<p>El primer caso que vamos a ver va a ser que la prueba de que el factorial
+de 0 devuelva un fallo en JUnit.</p>
+<p>Para ello tenemos escribir el siguiente código:</p>
+<div class="section" id="clase-factorial">
+<h3>Clase Factorial<a class="headerlink" href="#clase-factorial" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
 
 <span class="cm">/**</span>
-<span class="cm">* Hello world!</span>
-<span class="cm">*</span>
+<span class="cm">*Devolvemos 0 por defecto</span>
 <span class="cm">*/</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
 <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">long</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
-            <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clase-factorialtest">
+<h3>Clase FactorialTest<a class="headerlink" href="#clase-factorialtest" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialTest</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf0Return1</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span> <span class="o">=</span> <span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Cuando ejecutemos como JUnit test, debería aparecer el siguiene mensaje:</p>
+<div class="figure">
+<img alt="_images/ErrorJUnit.jpg" src="_images/ErrorJUnit.jpg" />
+</div>
+<p>Esto ocurre porque el valor esperado y el real no coinciden, por lo que
+nuestra prueba falla.</p>
+<p>Vamos a probar ahora a hacer una prueba que se ejecute de forma correcta,
+por lo que tendremos que modificar el método compute para que devuelva
+el valor correcto.</p>
+</div>
+<div class="section" id="id1">
+<h3>Clase Factorial<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">*Devolvemos 0 por defecto</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
+<span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Cuando ejecutemos como JUnit test, debería aparecer el siguiene mensaje:</p>
+<div class="figure">
+<img alt="_images/SuccessJUnit.jpg" src="_images/SuccessJUnit.jpg" />
+</div>
+<p>Esto nos indica que nuestra prueba ha sido un éxito.</p>
+</div>
+</div>
+<div class="section" id="mas-de-un-caso">
+<h2>Más de un caso<a class="headerlink" href="#mas-de-un-caso" title="Permalink to this headline">¶</a></h2>
+<p>Vamos a ampliar nuestro código para que nos devuelva también el factorial
+de 1.</p>
+<div class="section" id="id2">
+<h3>Clase Factorial<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">*   En este caso no tenemos que cambiar el valor que devuelve la</span>
+<span class="cm">*   función, ya que !0 y !1 son 1.</span>
+<span class="cm">*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Clase FactorialTest<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Modificamos la clase FactorialTest para poder ejecutar la prueba del
+factorial de 1.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialTest</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf0Return1</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span> <span class="o">=</span> <span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf1Return1</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Cuando ejecutemos shouldFactorialOf1Return1() se nos mostrará un mensaje
+éxito por pantalla, al igual que en el caso anterior.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf2Return2</span><span class="o">(){</span>
+    <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+    <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span>
+    <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+    <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Si ejecutamos esta prueba nos dará un fallo, ya que con el código que
+tenmos ahora mismo en nuestra función no devuelve el factorial de 2, por
+lo que nuestro siguiente paso será modificar la función compute de la
+clase Factorial.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
+<span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+         <span class="kt">long</span> <span class="n">result</span><span class="o">;</span>
+     <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
+         <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+     <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+         <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div>
+</div>
+<p>Si volvemos a ejecutar a prueba debe devolver un mensaje de éxito.</p>
+</div>
+</div>
+<div class="section" id="caso-general">
+<h2>Caso general<a class="headerlink" href="#caso-general" title="Permalink to this headline">¶</a></h2>
+<p>Llegados a este punto, ejecutar pruebas con cuarquier otro número nos
+devolvería un fallo, ya que no hemos contemplado ningún caso más a parte
+del 0,el 1 y el 2, por lo que debemos implementar una función que sirva
+para el caso general.</p>
+<div class="section" id="id4">
+<h3>Clase FactorialTest<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">result</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">){</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;Negative number:&quot;</span><span class="o">+</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
+             <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
         <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">compute</span><span class="o">(</span><span class="n">value</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+             <span class="n">result</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">compute</span><span class="o">((</span><span class="n">value</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
         <span class="o">}</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Clase FactorialTest<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Para comprobar que nuestro código funciona, solo tendremos que ejecutar
+la clase FactorialTest como una prueba JUnit.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialTest</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf0Return1</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span> <span class="o">=</span> <span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf1Return1</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf2Return2</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Si queremos hacer nuestro caso aún más general, deberíamos contemplar
+que ocurriría si queremos calcular el factorial de un número negativo,
+ya que ahora mismo entraría por la rama del else:</p>
+</div>
+<div class="section" id="id6">
+<h3>Clase FactorialTest<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factorial</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">result</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;Negative number:&quot;</span><span class="o">+</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
+            <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">compute</span><span class="o">((</span><span class="n">value</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>En este caso, queremos que si el número es negativo el sistema lance
+una excepción.</p>
+<p>Podemos comprobar que nuestro código funciona con añadiendo una nueva
+prueba a FactorialTest:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.BeforeEach</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">Factorial</span> <span class="n">factorial</span><span class="o">;</span>
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">(){</span>
+        <span class="n">factorial</span><span class="o">=</span><span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf0Return1</span><span class="o">(){</span>
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span> <span class="o">=</span> <span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf1Return1</span><span class="o">(){</span>
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf2Return2</span><span class="o">(){</span>
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldThrowException</span><span class="o">(){</span>
+    <span class="n">assertThrows</span><span class="o">(</span><span class="n">RuntimeException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(-</span><span class="mi">1</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Donde <code class="docutils literal notranslate"><span class="pre">shouldThrowException()</span></code> comprueba si se está lanzando la
+excepción.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Como añadido hemos creado una variable <code class="docutils literal notranslate"><span class="pre">factorial</span></code> que se inicializa
+antes de cada test (<code class="docutils literal notranslate"><span class="pre">&#64;BeforeEach</span></code>) para ahorrar código.</p>
+</div>
+<p>Si ejecutamos la clase FactorialTest nos devolverá el siguiente mensaje:</p>
+<div class="figure">
+<img alt="_images/successFinal.jpg" src="_images/successFinal.jpg" />
+</div>
+<p>Con lo que habremos concluido el desarrollo de nuestro programa con éxito.</p>
+</div>
 </div>
 </div>
 

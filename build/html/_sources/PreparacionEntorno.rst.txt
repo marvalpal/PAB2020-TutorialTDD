@@ -19,8 +19,8 @@ Vamos a resumir una serie de pasos a seguir:
     3. JDK de **JAVA** y arquetipo de **MAVEN** 
     4. Guardamos el proyecto en carpeta deseada
 
-Una vez instalados en el entorno de IntelliJ IDEA y seleccionamos para crear un proyecto nuevo, tendremos que 
-especificar el Java a emplear y seleccionar el arquetipo de Maven que corresponde, señalados en la siguiente imagen.
+Una vez instalados en el entorno de IntelliJ IDEA y seleccionado crear un proyecto nuevo, tendremos que 
+especificar la versión de Java a emplear y seleccionar el arquetipo de Maven que corresponde, señalados en la siguiente imagen.
 
 .. figure:: /image/creacion1.jpg
 
@@ -53,7 +53,7 @@ la version de *JUnit.Jupiter versión 5.6.2*.
         <scope>test</scope>
     </dependency>
        
-Este es el código que corresponde a la versión de JUnit a utilizar, y tendríamos que modificarlo en las
+Este es el código que corresponde a la versión de JUnit a utilizar, y que tendríamos que modificar en las
 dependencias de pom.xml. Una vez realizada esta modificación, probamos el test de prueba que el proyecto 
 ha generado por defecto. Si nos da error, podemos volver a importar JUnit en a clase *AppTest*, seleccionando
 el JUnit que hemos añadido en las dependencias. 
@@ -62,7 +62,7 @@ a implementar.
 
 .. figure:: /image/creacion5.jpg
 
-Nos creamos los nuevos paquetes y las clases *Factorial* y *FactorialTest*, donde trabajaremos en la aplicación 
+Por últirmo, creamos los nuevos paquetes y las clases *Factorial* y *FactorialTest*, donde trabajaremos en la aplicación 
 de TDD a través de las pruebas de JUnit. 
 
 .. topic:: Organización de nuestra carpeta **src**:
