@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Test Driven Development 
-=========================
+=======================
 *TDD aplicado al proyecto FACTORIAL*
 ....................................
 
@@ -15,11 +15,12 @@ Test Driven Development
    Objetivos
    PreparacionEntorno
    EjemploTDD
+   mavenGit
 
 
 
 Indices and tables
-==================
+..................
 
 * :ref:`genindex`
 * :ref:`modindex`

@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Maven y control de versiones con Git &#8212; Sphinx-Themes template 1 documentation</title>
+    <link rel="stylesheet" href="_static/trstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Ejemplo de TDD" href="EjemploTDD.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="EjemploTDD.html" title="Ejemplo de TDD"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Sphinx-Themes template 1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><em>Maven y control de versiones con Git</em></a><ul>
+<li><a class="reference internal" href="#uso-de-git">Uso de Git</a></li>
+<li><a class="reference internal" href="#uso-de-maven">Uso de Maven</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="EjemploTDD.html"
+                        title="previous chapter"><em>Ejemplo de TDD</em></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mavenGit.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="maven-y-control-de-versiones-con-git">
+<h1><em>Maven y control de versiones con Git</em><a class="headerlink" href="#maven-y-control-de-versiones-con-git" title="Permalink to this headline">¶</a></h1>
+<p>Sería conveniente que llevasemos un control de las versioes de nuestro
+proyecto usando Git.
+Esto podemos hacerlo desde el mismo terminal de IntelliJ, aunque también
+podemos trabajar desde el terminal de nuestro ordenador o desde GitBash.</p>
+<div class="section" id="uso-de-git">
+<h2>Uso de Git<a class="headerlink" href="#uso-de-git" title="Permalink to this headline">¶</a></h2>
+<p>Lo primero que tenemos que hacer es iniciar un repositorio local en
+nuestra máquina, esto lo hacemos con el comando <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>. El nuevo
+repositorio se creará en la carpeta que estemos usando como directorio
+de trabajo.</p>
+<p>Una vez creado el repositorio, podemos ver en que estado está usando
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. En este momento, nos devolverá el siguiente mensaje:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>On branch master
+No commits yet
+
+Untracked files:
+(use &quot;git add <span class="p">&lt;</span><span class="nt">file</span><span class="p">&gt;</span>...&quot; to include in what will be committed)
+
+        .idea/
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to
+track)
+</pre></div>
+</div>
+<p>Esto nos indica que estamos en la rama principal y que todavía no hemos
+hecho ningún commit, además de indicarnos que tenemos archivos sin
+seguimiento de Git.</p>
+<p>Para añadir estos archivos, usamos el commando <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> (Podemos
+añadirlos todos usando <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--all</span></code>).
+Nosotros vamos a añadir src y pom.xml</p>
+<p>Una vez los hayamos añadido, tecleamos <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-am</span> <span class="pre">&quot;First</span> <span class="pre">com</span>
+<span class="pre">mit&quot;</span></code>. Podemos acceder al registro de cambios usando <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
+<p>Para subir los cambios al directorio remoto, debemos hacer un
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">master</span></code>.</p>
+<p>Otros comandos de utilidad para trabajar con Git son:</p>
+<p>Remote: Nos perimite gestionar repositorios remotos
+Branch: Nospermite gestionar las ramas.</p>
+</div>
+<div class="section" id="uso-de-maven">
+<h2>Uso de Maven<a class="headerlink" href="#uso-de-maven" title="Permalink to this headline">¶</a></h2>
+<p>Para trabajar con maven podemos hacerlo también desde el propio terminal
+de IntelliJ o desde el teminal de nuestra máquina.</p>
+<p>Los comando con los que vamos a trabajar principalmente son:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">compile</span></code>, que compila nuestro proyecto (Valga la redundancia).
+Después de compilar, podemos limpiar el proyecto antes de ejecutar los
+test usando <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">clean</span></code>. Los test pueden ejecutarse tecleando
+<code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">test</span></code>, que también compila nuestro código.</p>
+<p>Por último, el comando <code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">package</span></code> compila nuestro código, ejecuta
+los test y genera un jar.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="EjemploTDD.html" title="Ejemplo de TDD"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Sphinx-Themes template 1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, sphinx-themes.org.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

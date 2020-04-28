@@ -17,6 +17,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Maven y control de versiones con Git" href="mavenGit.html" />
     <link rel="prev" title="Preparación del entorno" href="PreparacionEntorno.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,6 +26,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mavenGit.html" title="Maven y control de versiones con Git"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="PreparacionEntorno.html" title="Preparación del entorno"
              accesskey="P">previous</a> |</li>
@@ -60,6 +64,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="PreparacionEntorno.html"
                         title="previous chapter"><em>Preparación del entorno</em></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mavenGit.html"
+                        title="next chapter"><em>Maven y control de versiones con Git</em></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -91,8 +98,19 @@
 <h1><em>Ejemplo de TDD</em><a class="headerlink" href="#ejemplo-de-tdd" title="Permalink to this headline">¶</a></h1>
 <p>Una vez preparado el entorno, ya podemos empezar a programar.</p>
 <p>Como ya hemos dicho anteriormente, vamos a aplicar el TDD a un pequeño programa
-que nos devuelva el factorial de un número. vamos a desarrollar nuestro proyecto
-en diferentes fases:</p>
+que nos devuelva el factorial de un número. Para ello, vamos plantear distintos
+casos de prueba:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>El factorial de 0.</li>
+<li>El factorial de 1.</li>
+<li>El factorial de 2.</li>
+<li>El factorial de 4.</li>
+<li>El factorial de un número negativo.</li>
+</ol>
+</div></blockquote>
+<p>Una vez planteados nuestros casos de prueba, vamos a desarrollar nuestro
+proyecto en diferentes fases:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Un solo caso básico.</li>
@@ -150,9 +168,15 @@ de 0 devuelva un fallo en JUnit.</p>
 </div>
 <p>Esto ocurre porque el valor esperado y el real no coinciden, por lo que
 nuestra prueba falla.</p>
-<p>Vamos a probar ahora a hacer una prueba que se ejecute de forma correcta,
-por lo que tendremos que modificar el método compute para que devuelva
-el valor correcto.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si clicamos en el error, este nos redirige a la parte del codigo que
+ha hecho que nuestro test falle y no explica porqué.</p>
+</div>
+<p>Esto nos indica que nuestro programa no está contemplando el caso de
+prueba, por lo que tendremos que modificar nuestro código para que si
+lo haga (Es decir,tendremos que modificar el método compute para que devuelva
+el valor correcto).</p>
 </div>
 <div class="section" id="id1">
 <h3>Clase Factorial<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -282,9 +306,7 @@ para el caso general.</p>
 <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">long</span> <span class="nf">compute</span><span class="o">(</span><span class="kt">long</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">long</span> <span class="n">result</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">){</span>
-             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;Negative number:&quot;</span><span class="o">+</span><span class="n">value</span><span class="o">);</span>
-        <span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">value</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
              <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
         <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
              <span class="n">result</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">compute</span><span class="o">((</span><span class="n">value</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
@@ -297,8 +319,9 @@ para el caso general.</p>
 </div>
 <div class="section" id="id5">
 <h3>Clase FactorialTest<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>Para comprobar que nuestro código funciona, solo tendremos que ejecutar
-la clase FactorialTest como una prueba JUnit.</p>
+<p>Como hemos eliminado la rama del if que correspondía a value==2, tendremos
+que volver a ejecutar el test <code class="docutils literal notranslate"><span class="pre">shouldFactorialOf2Return2()</span></code> para comprobar
+que no hemos introducido un nuevo fallo en el código que no estuviese antes.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.example</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
@@ -333,6 +356,16 @@ la clase FactorialTest como una prueba JUnit.</p>
 
         <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span>
         <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldFactorialOf4Return24</span><span class="o">(){</span>
+        <span class="n">Factorial</span> <span class="n">factorial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Factorial</span><span class="o">();</span>
+
+        <span class="kt">long</span> <span class="n">expectedValue</span><span class="o">=</span><span class="mi">24</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">obtainedValue</span><span class="o">=</span><span class="n">factorial</span><span class="o">.</span><span class="na">compute</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
 
         <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedValue</span><span class="o">,</span><span class="n">obtainedValue</span><span class="o">);</span>
     <span class="o">}</span>
@@ -439,6 +472,9 @@ antes de cada test (<code class="docutils literal notranslate"><span class="pre"
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="mavenGit.html" title="Maven y control de versiones con Git"
+             >next</a> |</li>
         <li class="right" >
           <a href="PreparacionEntorno.html" title="Preparación del entorno"
              >previous</a> |</li>

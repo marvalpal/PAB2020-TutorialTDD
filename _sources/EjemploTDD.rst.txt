@@ -4,8 +4,17 @@
 Una vez preparado el entorno, ya podemos empezar a programar.
 
 Como ya hemos dicho anteriormente, vamos a aplicar el TDD a un pequeño programa 
-que nos devuelva el factorial de un número. vamos a desarrollar nuestro proyecto 
-en diferentes fases:
+que nos devuelva el factorial de un número. Para ello, vamos plantear distintos
+casos de prueba:
+    1. El factorial de 0.
+    2. El factorial de 1.
+    3. El factorial de 2.
+    4. El factorial de 4.
+    5. El factorial de un número negativo.
+
+
+Una vez planteados nuestros casos de prueba, vamos a desarrollar nuestro 
+proyecto en diferentes fases:
 
     1. Un solo caso básico.
     2. Más de un caso.
@@ -70,10 +79,15 @@ Cuando ejecutemos como JUnit test, debería aparecer el siguiene mensaje:
 Esto ocurre porque el valor esperado y el real no coinciden, por lo que 
 nuestra prueba falla.
 
-Vamos a probar ahora a hacer una prueba que se ejecute de forma correcta,
-por lo que tendremos que modificar el método compute para que devuelva 
-el valor correcto.
+.. note::
 
+    Si clicamos en el error, este nos redirige a la parte del codigo que
+    ha hecho que nuestro test falle y no explica porqué.
+
+Esto nos indica que nuestro programa no está contemplando el caso de 
+prueba, por lo que tendremos que modificar nuestro código para que si 
+lo haga (Es decir,tendremos que modificar el método compute para que devuelva 
+el valor correcto).
 
 Clase Factorial
 ^^^^^^^^^^^^^^^
@@ -219,9 +233,7 @@ Clase FactorialTest
     {
         public long compute(long value) {
 	    long result;
-	    if (value<0){
-	         throw new RuntimeException("Negative number:"+value);
-	    }else if(value==0 || value==1){
+	    if(value==0 || value==1){
 	         result=1;
 	    }else {
 	         result = value*compute((value-1));
@@ -233,8 +245,9 @@ Clase FactorialTest
 Clase FactorialTest
 ^^^^^^^^^^^^^^^^^^^
 
-Para comprobar que nuestro código funciona, solo tendremos que ejecutar 
-la clase FactorialTest como una prueba JUnit.
+Como hemos eliminado la rama del if que correspondía a value==2, tendremos
+que volver a ejecutar el test ``shouldFactorialOf2Return2()`` para comprobar
+que no hemos introducido un nuevo fallo en el código que no estuviese antes.
 
 .. code-block:: java
 
@@ -272,6 +285,16 @@ la clase FactorialTest como una prueba JUnit.
 
             long expectedValue=2;
             long obtainedValue=factorial.compute(1);
+
+            assertEquals(expectedValue,obtainedValue);
+        }
+
+        @Test
+        public void shouldFactorialOf4Return24(){
+            Factorial factorial = new Factorial();
+
+            long expectedValue=24;
+            long obtainedValue=factorial.compute(4);
 
             assertEquals(expectedValue,obtainedValue);
         }
